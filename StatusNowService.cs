@@ -8,18 +8,24 @@ namespace StatusNowFancyMCP;
 public class StatusNowService
 {
 
-    string _accesstoken = "";
-    Int64 _accountid = 0;
+    public string _accesstoken = "";
+    public Int64 _accountid = 0;
 
     public StatusNowService(string accesstoken, Int64 accountid)
     {
-        // Constructor logic here
-        string _accesstoken = accesstoken; 
-        Int64 _accountid = accountid;
+        // Correctly initialize the fields
+        _accesstoken = accesstoken; 
+        _accountid = accountid;
+
+        Console.WriteLine("StatusNowService constructor called");
+        Console.WriteLine("AccessToken: " + accesstoken);
+        Console.WriteLine("AccountId: " + accountid);
     }
 
     public async Task<List<MonitorsModel>> GetMonitors()
     {
+
+        Console.WriteLine("Get Monitors Called with AccessToken: " + _accesstoken + " and AccountId: " + _accountid);
 
         var client = new HttpClient();
         client.DefaultRequestHeaders.Add("X-Api-Key", _accesstoken);
@@ -28,6 +34,7 @@ public class StatusNowService
             Method = HttpMethod.Get,
             RequestUri = new Uri("https://statusnow.dev/api/Monitors/List?accountid=" + _accountid),
         };
+
         using (var response = await client.SendAsync(request))
         {
             response.EnsureSuccessStatusCode();
@@ -47,6 +54,8 @@ public class StatusNowService
     public async Task<List<AlertsModel>> GetAlerts()
     {
 
+        Console.WriteLine("Get Alerts Called with AccessToken: " + _accesstoken + " and AccountId: " + _accountid);
+
         var client = new HttpClient();
         client.DefaultRequestHeaders.Add("X-Api-Key", _accesstoken);
         var request = new HttpRequestMessage
@@ -54,6 +63,7 @@ public class StatusNowService
             Method = HttpMethod.Get,
             RequestUri = new Uri("https://statusnow.dev/api/Alerts/List?accountid=" + _accountid + "&shownew=true&showopen=true&showclosed=false"),
         };
+
         using (var response = await client.SendAsync(request))
         {
             response.EnsureSuccessStatusCode();

@@ -11,7 +11,6 @@ public class StatusNowMCPTools
     [McpServerTool, Description("Get a list of alerts")]
     public static async Task<string> GetAlertList(StatusNowService statusNowService, string accesstoken, Int64 accountid)
     {
-
         StatusNowService objstatusNowService = new StatusNowService(accesstoken,accountid);
 
         var alerts = await objstatusNowService.GetAlerts();
@@ -19,10 +18,10 @@ public class StatusNowMCPTools
     }
 
     [McpServerTool, Description("Get a list of monitors")]
-    public static async Task<string> GetMonitorList(StatusNowService statusNowService,string accesstoken, Int64 accountid)
+    public static async Task<string> GetMonitorList(StatusNowService statusNowService, string accesstoken, Int64 accountid)
     {
 
-        StatusNowService objstatusNowService = new StatusNowService(accesstoken, accountid);
+        StatusNowService objstatusNowService = new StatusNowService(accesstoken,accountid);
 
         var monitors = await objstatusNowService.GetMonitors();
         return JsonSerializer.Serialize(monitors);

@@ -15,7 +15,7 @@ builder.Services.Configure<StatusNowOptions>(builder.Configuration);
 builder.Logging.AddConsole(consoleLogOptions =>
 {
     // Configure all logs to go to stderr
-    consoleLogOptions.LogToStandardErrorThreshold = LogLevel.Trace;
+    consoleLogOptions.LogToStandardErrorThreshold = LogLevel.Debug;
 });
 builder.Services
     .AddMcpServer()
@@ -26,6 +26,7 @@ var options = builder.Configuration.Get<StatusNowOptions>();
 StatusNowService objstatusNowService = new StatusNowService(options.AccountToken, options.AccountId);
 
 builder.Services.AddSingleton<StatusNowService>(objstatusNowService);
+//builder.Services.AddSingleton<StatusNowService>();
 
 await builder.Build().RunAsync();
 
