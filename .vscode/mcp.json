@@ -1,0 +1,18 @@
+{
+    "servers": {
+        "statusnowmcp": {
+            "type": "stdio",
+            "command": "dotnet",
+            "args": [
+                "run",
+                "--project",
+                "C:\\Users\\nkrug\\OneDrive\\PRIV_Data\\StatusNowMCP\\StatusNowMCP.csproj",
+                "--",
+                "--accountid",
+                "0",
+                "--accounttoken",
+                ""
+            ]
+        }
+    }
+}
