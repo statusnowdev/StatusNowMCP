@@ -7,6 +7,7 @@ Free account sign-up: https://statusnow.dev/sign-up.html
 
 Download the MCP Server and run it locally (dotnet) on Windows, Linux or Mac or via a Docker image.
 
+<code>
 {
     "servers": {
         "statusnowmcp": {
@@ -25,3 +26,4 @@ Download the MCP Server and run it locally (dotnet) on Windows, Linux or Mac or 
         }
     }
 }
+</code>
