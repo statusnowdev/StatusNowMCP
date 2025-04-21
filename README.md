@@ -17,7 +17,6 @@ Download the MCP Server and run it locally (dotnet) on Windows, Linux or Mac or 
                 "run",
                 "--project",
                 "<PATH_TO_PROJECT>\\StatusNowMCP.csproj",
-                "--",
                 "--accountid",
                 "<YOUR_ACCOUNTID>",
                 "--accounttoken",
