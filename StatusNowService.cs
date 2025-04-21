@@ -11,6 +11,7 @@ public class StatusNowService
     public string _accesstoken = "";
     public Int64 _accountid = 0;
 
+
     public StatusNowService(string accesstoken, Int64 accountid)
     {
         // Correctly initialize the fields
@@ -78,6 +79,170 @@ public class StatusNowService
         }
 
     }
+
+    public async Task<string> PauseMonitor(Int64 monitorid)
+    {
+
+        Console.WriteLine("Pause Monitor Called with AccessToken: " + _accesstoken + " and AccountId: " + _accountid + " and MonitorId: " + monitorid);
+
+        var client = new HttpClient();
+        client.DefaultRequestHeaders.Add("X-Api-Key", _accesstoken);
+        var request = new HttpRequestMessage
+        {
+            Method = HttpMethod.Post,
+            RequestUri = new Uri("https://statusnow.dev/api/Monitors/" + monitorid + "/Pause?accountid=" + _accountid),
+        };
+
+        using (var response = await client.SendAsync(request))
+        {
+            response.EnsureSuccessStatusCode();
+            var body = await response.Content.ReadAsStringAsync();
+
+            return body;
+        }
+
+    }   
+
+    public async Task<string> ResumeMonitor(Int64 monitorid, string cronfrequency) {
+
+        Console.WriteLine("Resume Monitor Called with AccessToken: " + _accesstoken + " and AccountId: " + _accountid + " and MonitorId: " + monitorid );
+
+        if (cronfrequency == null || cronfrequency == "") {
+            cronfrequency = "*/3 * * * *"; //Default to 3 minutes if no frequency is provided
+        }
+        if (cronfrequency =="0 * * * *") {
+            cronfrequency = "*/3 * * * *"; //Default to 3 minutes if no frequency is provided
+        }
+
+        var client = new HttpClient();
+        client.DefaultRequestHeaders.Add("X-Api-Key", _accesstoken);
+        var request = new HttpRequestMessage
+        {
+            Method = HttpMethod.Post,
+            RequestUri = new Uri("https://statusnow.dev/api/Monitors/" + monitorid + "/Resume?accountid=" + _accountid + "&frequency=" + Uri.EscapeDataString(cronfrequency)),
+        };
+
+        using (var response = await client.SendAsync(request))
+        {
+            response.EnsureSuccessStatusCode();
+            var body = await response.Content.ReadAsStringAsync();
+
+            return body;
+        }
+
+    }
+
+    public async Task<string> CertCheck(string urltocheck)
+    {
+
+        Console.WriteLine("Cert Check Called with AccessToken: " + _accesstoken + " and AccountId: " + _accountid);
+
+        var client = new HttpClient();
+        client.DefaultRequestHeaders.Add("X-Api-Key", _accesstoken);
+        var request = new HttpRequestMessage
+        {
+            Method = HttpMethod.Get,
+            RequestUri = new Uri("https://statusnow.dev/api/Monitors/CertCheck?url=" + urltocheck),
+        };
+
+        using (var response = await client.SendAsync(request))
+        {
+            response.EnsureSuccessStatusCode();
+            var body = await response.Content.ReadAsStringAsync();
+
+            if (body == "" || body == "[]"){
+                body = "Success: No certificate issues found";
+            }
+
+            return body;
+        }
+
+    }
+
+    public async Task<string> DomainCheck(string urltocheck)
+    {
+
+        Console.WriteLine("Domain Check Called with AccessToken: " + _accesstoken + " and AccountId: " + _accountid);
+
+        var client = new HttpClient();
+        client.DefaultRequestHeaders.Add("X-Api-Key", _accesstoken);
+        var request = new HttpRequestMessage
+        {
+            Method = HttpMethod.Get,
+            RequestUri = new Uri("https://statusnow.dev/api/Monitors/DomainCheck?url=" + urltocheck),
+        };
+
+        using (var response = await client.SendAsync(request))
+        {
+            response.EnsureSuccessStatusCode();
+            var body = await response.Content.ReadAsStringAsync();
+
+            if (body == "" || body == "[]"){
+                body = "Success: No domain issues found";
+            }
+
+            return body;
+        }
+
+    }
+
+    public async Task<string> PingCheck(string urltocheck)
+    {
+
+        Console.WriteLine("Ping Check Called with AccessToken: " + _accesstoken + " and AccountId: " + _accountid);
+
+        var client = new HttpClient();
+        client.DefaultRequestHeaders.Add("X-Api-Key", _accesstoken);
+        var request = new HttpRequestMessage
+        {
+            Method = HttpMethod.Get,
+            RequestUri = new Uri("https://statusnow.dev/api/Monitors/PingCheck?url=" + urltocheck),
+        };
+
+        using (var response = await client.SendAsync(request))
+        {
+            response.EnsureSuccessStatusCode();
+            var body = await response.Content.ReadAsStringAsync();
+
+            if (body == "" || body == "[]"){
+                body = "Success: No ping/site issues found";
+            }
+
+            return body;
+        }
+
+    }
+
+    public async Task<string> HttpCheck(string urltocheck)
+    {
+
+        Console.WriteLine("Http Check Called with AccessToken: " + _accesstoken + " and AccountId: " + _accountid);
+
+        var client = new HttpClient();
+        client.DefaultRequestHeaders.Add("X-Api-Key", _accesstoken);
+        var request = new HttpRequestMessage
+        {
+            Method = HttpMethod.Get,
+            RequestUri = new Uri("https://statusnow.dev/api/Monitors/HttpCodeCheck?url=" + urltocheck),
+        };
+
+        using (var response = await client.SendAsync(request))
+        {
+            response.EnsureSuccessStatusCode();
+            var body = await response.Content.ReadAsStringAsync();
+
+            if (body == "" || body == "[]"){
+                body = "Success: No http issues found";
+            }
+
+            return body;
+        }
+
+    }
+
+
+
+
 
 }
 

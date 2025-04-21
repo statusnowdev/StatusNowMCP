@@ -6,11 +6,11 @@
             "args": [
                 "run",
                 "--project",
-                "C:\\Users\\nkrug\\OneDrive\\PRIV_Data\\StatusNowMCP\\StatusNowMCP.csproj",
+                "<PATH>\\StatusNowMCP.csproj",
                 "--accountid",
-                "",
+                "0",
                 "--accounttoken",
-                ""
+                "XXXX"
             ]
         }
     }
