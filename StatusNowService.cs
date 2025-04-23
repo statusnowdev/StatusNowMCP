@@ -8,19 +8,19 @@ namespace StatusNowFancyMCP;
 public class StatusNowService
 {
 
-    public string _accesstoken = "";
-    public Int64 _accountid = 0;
+    public string _accesstoken = Environment.GetEnvironmentVariable("accesstoken") != null ? Convert.ToString(Environment.GetEnvironmentVariable("accesstoken")) : "";
+    public Int64 _accountid = Environment.GetEnvironmentVariable("accountid") != null ? Convert.ToInt64(Environment.GetEnvironmentVariable("accountid")) : 0;
 
 
-    public StatusNowService(string accesstoken, Int64 accountid)
+    public StatusNowService()
     {
-        // Correctly initialize the fields
-        _accesstoken = accesstoken; 
-        _accountid = accountid;
+        //// Correctly initialize the fields
+        //_accesstoken = accesstoken; 
+        //_accountid = accountid;
 
         Console.WriteLine("StatusNowService constructor called");
-        Console.WriteLine("AccessToken: " + accesstoken);
-        Console.WriteLine("AccountId: " + accountid);
+        Console.WriteLine("AccessToken: " + _accesstoken);
+        Console.WriteLine("AccountId: " + _accountid);
     }
 
     public async Task<List<MonitorsModel>> GetMonitors()
@@ -103,16 +103,19 @@ public class StatusNowService
 
     }   
 
-    public async Task<string> ResumeMonitor(Int64 monitorid, string cronfrequency) {
+    public async Task<string> ResumeMonitor(Int64 monitorid) {
 
         Console.WriteLine("Resume Monitor Called with AccessToken: " + _accesstoken + " and AccountId: " + _accountid + " and MonitorId: " + monitorid );
 
-        if (cronfrequency == null || cronfrequency == "") {
-            cronfrequency = "*/3 * * * *"; //Default to 3 minutes if no frequency is provided
-        }
-        if (cronfrequency =="0 * * * *") {
-            cronfrequency = "*/3 * * * *"; //Default to 3 minutes if no frequency is provided
-        }
+        //Default to 3min interval
+        string cronfrequency = "*/3 * * * *";
+
+        //if (cronfrequency == null || cronfrequency == "") {
+        //    cronfrequency = "*/3 * * * *"; //Default to 3 minutes if no frequency is provided
+        //}
+        //if (cronfrequency =="0 * * * *") {
+        //    cronfrequency = "*/3 * * * *"; //Default to 3 minutes if no frequency is provided
+        //}
 
         var client = new HttpClient();
         client.DefaultRequestHeaders.Add("X-Api-Key", _accesstoken);
@@ -239,9 +242,6 @@ public class StatusNowService
         }
 
     }
-
-
-
 
 
 }

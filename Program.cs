@@ -22,11 +22,11 @@ builder.Services
     .WithStdioServerTransport()
     .WithToolsFromAssembly();
 
-var options = builder.Configuration.Get<StatusNowOptions>();
-StatusNowService objstatusNowService = new StatusNowService(options.AccountToken, options.AccountId);
+//var options = builder.Configuration.Get<StatusNowOptions>();
+//StatusNowService objstatusNowService = new StatusNowService();
 
-builder.Services.AddSingleton<StatusNowService>(objstatusNowService);
-//builder.Services.AddSingleton<StatusNowService>();
+//builder.Services.AddSingleton<StatusNowService>(objstatusNowService);
+builder.Services.AddSingleton<StatusNowService>();
 
 await builder.Build().RunAsync();
 
