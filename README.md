@@ -30,5 +30,5 @@ Download the MCP Server and run it locally (dotnet) on Windows, Linux or Mac or 
 You can run the MCP Inspector using this command:
 
 <code>
-In your Terminal >>  npx @modelcontectprotocol./inspector dotnet run
+Command Line: npx @modelcontextprotocol/inspector dotnet run
 </code>
