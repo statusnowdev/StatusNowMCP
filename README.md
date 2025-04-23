@@ -16,12 +16,12 @@ Download the MCP Server and run it locally (dotnet) on Windows, Linux or Mac or 
             "args": [
                 "run",
                 "--project",
-                "<PATH_TO_PROJECT>\\StatusNowMCP.csproj",
-                "--accountid",
-                "<YOUR_ACCOUNTID>",
-                "--accounttoken",
-                "<YOUR_STATUSNOW_ACCESSTOKEN>"
-            ]
+                "<PATH_TO_PROJECT>\\StatusNowMCP.csproj"
+            ],
+            "env": {
+                "accesstoken": "<ACCESS_TOKEN>",
+                "accountid": "<ACCOUNT_ID>"
+            }
         }
     }
 }
