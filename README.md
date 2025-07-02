@@ -1,7 +1,7 @@
 # StatusNow.Dev - MCP Server for StatusNow.dev Website and Server Monitoring Tools
 Monitor your websites, servers, and services with our comprehensive monitoring solution. Track SSL expiration, domain expiration, website uptime, response times, ping monitoring, and port monitoring.
 
-Free account sign-up: https://statusnow.dev/sign-up.html
+Free account sign-up: https://statusnow.dev/main/sign-up.html
 
 <hr>
 
